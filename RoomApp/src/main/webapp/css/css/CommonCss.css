@@ -1,0 +1,245 @@
+ 
+/*     Document   : CommonCss */
+/*     Created on : Mar 8, 2015, 16:12:05 PM */
+/*     Author     : Rajagopalan.G */
+/*     Description: */
+/*         Purpose of the stylesheet follows. */
+
+
+ 
+/*    TODO customize this sample style */
+/*    Syntax recommendation http://www.w3.org/TR/REC-CSS2/ */
+   
+input[type=text]{
+	background: white;
+    border: 1px solid #0063A6;/* #98C0E1 */
+    border-radius: 5px;
+    box-shadow: 0 0 2px 1px #0063A6;
+    color: #666;
+    outline: none;
+    height: 23px;
+    width: 150px;
+}
+   
+input[type=text]:FOCUS {
+    background: white;
+    border: 1px solid green;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 2px green;
+    color: #666;
+    outline: none;
+    height: 23px;
+    width: 150px;
+}
+
+select{
+	background: white;
+    border: 1px solid #0063A6;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 1px #0063A6;
+    color: #666;
+    outline: none;
+    height: 23px;
+    width: 160px;
+}
+
+select:FOCUS{
+	background: white;
+    border: 1px solid green;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 2px green;
+    color: #666;
+    outline: none;
+    height: 23px;
+    width: 160px;
+}
+
+
+button#submitbutton {
+       cursor: pointer;
+       padding: 1px 5px; /*add some padding to the inside of the button*/
+       background: #0063A6; /*the colour of the button*/
+       border: 1px solid #0063A6;
+       width:120px;
+       -moz-border-radius: 7px;
+       -webkit-border-radius: 7px;
+       border-radius: 7px;
+       -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, .75);
+       -moz-box-shadow: 0 0 2px rgba(0, 0, 0, .75);
+       box-shadow: 0 0 2px rgba(0, 0, 0, .75);
+       color: #fff;
+       font-size: 1.2em;
+}
+button#submitbutton:hover, button#submitbutton:focus {
+       color: #edebda;
+       /*reduce the spread of the shadow to give a pushed effect*/
+       -webkit-box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+       -moz-box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+       box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+}
+
+/*
+
+root { 
+    display: block;
+}
+
+
+.clear {  generic container (i.e. div) for floating buttons 
+         overflow: hidden;
+         width: 100%;
+}
+
+a.button {
+    background: transparent url('../Images/ButtonImage.jpg') no-repeat scroll top right;
+    color: #ffffff;
+    display: block;
+    float: left;
+    font: normal 12px arial, sans-serif;
+    height: 25px;
+     sliding doors padding 
+    text-decoration: none;
+    width: 150px;
+    text-align: center;
+    vertical-align: middle;
+    position: static;
+    font-weight: bolder;
+    padding-top: 6px;
+    border-bottom-color: #ffffff;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: white;
+}
+
+a.button span {
+    background: transparent url('../Images/ButtonImage.jpg') no-repeat;
+    display: block;
+    line-height: 14px;
+    padding: 5px 0 5px 18px;
+}
+
+a.button:active {
+    background-position: bottom right;
+    color: #000;
+    outline: none;  hide dotted outline in Firefox 
+}
+
+a.button:active span {
+    background-position: bottom left;
+    padding: 6px 0 4px 18px;  push text down 1px 
+}
+
+.leftlink
+{
+    top: 5px;
+    width:180px;
+    height:90%;
+    position: absolute;
+    border-right-style: solid;
+    border-right-width: 2px;
+    border-right-color: black;
+}
+
+.topframe {
+    background: transparent url('../Images/ButtonImage.jpg');
+    color: #ffffff;
+    display: block;
+    float: left;
+    height: 5px;
+     sliding doors padding 
+    width: 100%;
+    position: absolute;
+
+}
+
+.sublinklist {
+    background-color: #999999;
+    width: 150px;
+    text-align: left;
+}
+
+a.sublinklist {
+    font-family: Arial,Helvetica,sans-serif;
+    text-decoration: none;
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    position: relative;
+}
+
+.message {
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-bottom-style: solid;
+    border-top-style: solid;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-bottom-width: 1px;
+    border-top-width: 1px;
+    border-right-color: #cccccc;
+    border-left-color: #cccccc;
+    border-bottom-color: #cccccc;
+    border-top-color: #cccccc;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+h1 {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 16px;
+    color: #006633;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.inputBlock {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-bottom-style: solid;
+    border-top-style: solid;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-bottom-width: 1px;
+    border-top-width: 1px;
+    border-right-color: #cccccc;
+    border-left-color: #cccccc;
+    border-bottom-color: #cccccc;
+    border-top-color: #cccccc;
+
+    position: relative;
+    text-align: center;
+    padding-right: 5%;
+    padding-left: 5%;
+    padding-bottom: 2%;
+    padding-top: 1%;
+    width: 50%;
+}
+
+.errorMessage {
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    color: #ff0000;
+    text-align: center;
+}
+
+a.selected {
+  color: red;
+}
+
+#tabs .ui-tabs-active {
+  background: yellow;
+}*/
+
