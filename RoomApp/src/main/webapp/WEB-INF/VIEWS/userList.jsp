@@ -4,6 +4,23 @@
  <%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="css/jquery-ui-1.10.0.custom.min.css"
+	type="text/css" />
+<link type="text/css" rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/styles.css" />
+<script type="text/javascript" src="Javascripts/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="Javascripts/jquery.ui.core.min.js"></script>
+<link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script type="text/javascript" src="Javascripts/myAuto.js"></script>
+<script type="text/javascript" src="Javascripts/myAuto2.js"></script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -19,9 +36,25 @@
        width: 600px;
 }
 </style>
+<script type="text/javascript">
+function validateForm() {
+	 var userID =  $('#userID').val();
+	  if (userID == "") {
+	    alert("please enter ID");
+	    return false;
+	  }
+	 
+	} 
+function numbersonly(evt){
+	var charcode = (evt.which) ? evt.which : event.keyCode
+	if(charcode > 31 && (charcode < 48 || charcode > 57))
+	return false;
+	return true;
+	}
+</script>
 </head>
 <body>
-<form action="gotoUserList" method="get">
+<form action="gotoUserList" method="get" >
 <div id="textBox" class="textBox">
 	<table align="center" frame="box" width=50%"" nowrap >
 			<tr style="bgcolor:4682B4"  bordercolor="blue">
@@ -113,8 +146,8 @@
 <table>
 <tr>
 <th>
-<input type="text" name="userID">
-<button type="submit" formaction="activateUser" value="activate"> </button>
+<input type="text" name="userID" id="userID">
+<input type="submit" formaction="activateUser" value="activate" onclick="return validateForm()" /> 
 
 </tr>
 

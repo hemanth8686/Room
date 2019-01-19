@@ -143,7 +143,7 @@ img {
 	
 		<tr></tr>
 		  <div class="centered">Centered
-    <img src= "pubg-4k-06.jpg" class="avatar">
+    <img src= "https://icdn4.digitaltrends.com/image/pubg-4k-06.jpg?ver=1" class="avatar">
     </div>
     <div class="top-right">Top Right
     <marquee behavior="blink" direction="left" bgcolor="red">Welcome to roomapp <a><%=firstName%></a> have a nice day!</marquee>
