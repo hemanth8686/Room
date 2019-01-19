@@ -19,6 +19,8 @@
 <script type="text/javascript" src="Javascripts/jquery.ui.core.min.js"></script>
 <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script type="text/javascript" src="Javascripts/myAuto.js"></script>
+<script type="text/javascript" src="Javascripts/myAuto2.js"></script>
 <script>
 	$(function() {
 		$("#datepicker").datepicker({
@@ -65,12 +67,37 @@ body {
 } 
 
 </style>
+<script type="text/javascript">
+function validateForm() {
+	 var typ =  $('#Type').val();
+	 var amt =  $('#Amount').val();
+	 var Date =  $('#Date').val();
+	  if (Amount == "") {
+	    alert("Type must be filled out");
+	    return false;
+	  }
+	  if (amt == "") {
+		    alert("Amount must be filled out");
+		    return false;
+		  }
+	  if (Date == "") {
+		    alert("Date must be filled out");
+		    return false;
+		  }
+	} 
+function numbersonly(evt){
+	var charcode = (evt.which) ? evt.which : event.keyCode
+	if(charcode > 31 && (charcode < 48 || charcode > 57))
+	return false;
+	return true;
+	}
+</script>
 
 
 </head>
 
 <body>
-	<form action="dailyExpenses" method="post">
+	<form action="dailyExpenses" method="post" >
 
 		<%
 			Integer name = (Integer) session.getAttribute("name");
@@ -93,18 +120,18 @@ body {
 			
 			<tr>
 				<td>ExpensesType</td>
-				<td><input type="text" name="type">
+				<td><input type="text" name="type" id="Type">
 			</tr>
 			<tr>
 				<td>Amount</td>
-				<td><input type="text" name="amount">
+				<td><input type="text" name="amount" id="Amount">
 			</tr>
 			<tr>
 				<td>Date</td>
-				<td><input type="date" name="expenseDate"></td>
+				<td><input type="date" name="expenseDate" id="Date"></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="submit"></td>
+				<td><input type="submit" value="submit" onclick="return validateForm()"></td>
 			</tr>
 
 
