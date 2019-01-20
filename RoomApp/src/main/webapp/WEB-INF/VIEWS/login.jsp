@@ -85,7 +85,7 @@ span.psw {
   </div>
 
 			   <td>
-				<a href="http://localhost:8080/roomApp/mvc/showRegister">Register</a>
+				<a href="/roomApp/mvc/showRegister">Register</a>
 				</td>
 				
 				
