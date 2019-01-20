@@ -25,10 +25,38 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <script>
-	$(function() {
-		$("#fromdate").datepicker();
-		$("#todate").datepicker();
+$(function() {
+	$("#datepicker").datepicker({
+		changeMonth : true,
+		changeYear : true,
+		changeDay : true,
 	});
+	$("#datepicker1").datepicker({
+		changeMonth : true,
+		changeYear : true,
+		changeDay : true,
+	});
+});
+</script>
+<script type="text/javascript">
+function validateForm() {
+	 var fdate =  $('#datepicker').val();
+	 var tdate = $('#datepicker1').val();
+	 var user = $('#userName').val();
+	  if (fdate == "") {
+	    alert("please select fromdate");
+	    return false;
+	  }
+	  if (tdate == "") {
+		    alert("please select todate");
+		    return false;
+		  }
+	  if (user == "") {
+		    alert("please enter user");
+		    return false;
+		  }
+	 
+	}
 </script>
 <style>
   .bordered {
@@ -44,31 +72,32 @@
 
 
 	<form action="userWise" method="get">
-		<%
-			Integer name = (Integer) session.getAttribute("name");
 		
-		%>
 		 <%
          Date dNow = new Date( );
          SimpleDateFormat ft = 
          new SimpleDateFormat (" yyyy-MM-dd");
          out.print( "<h2 align=\"center\">" + ft.format(dNow) + "</h2>");
       %>
-		<table bgcolor="green" width="58%">
+		<table bgcolor="green" width="60%">
+		<%
+			Integer name = (Integer) session.getAttribute("name");
+		
+		%>
 		 
-			<tr align="right">
-				<td align="right" colspan="2">YOU ARE LOGEED IN AS: <a><%=name%></a>
+			<tr align="right" >
+				<td align="right" colspan="9">YOU ARE LOGEED IN AS: <a><%=name%></a>
 				</td>
 			</tr>
 			<tr>
 			<tr>
 				<td>userId:</td>
-				<th><input type="text" name="userName"></th>
+				<th><input type="text" name="userName" id="userName"></th>
 				<td>from::</td>
-				<th><input type="Date" name="fromDate" id="fromDate"></th>
+				<th><input type="text" name="fromDate" id="datepicker"></th>
 				<td>To:</td>
-				<th><input type="Date" name="toDate" id="toDate"></th>
-				<th><input type="submit" value="get"></th>
+				<th><input type="text" name="toDate" id="datepicker1"></th>
+				<th><input type="submit" value="get" onclick="return validateForm()"></th>
 			</tr>
 			</tr>
 
@@ -82,9 +111,9 @@
 		
 		
 			
-		<div class="bordered">
-		<table width="60%" align="center" height="30px"
-			style="border-collapse: separate; border-spacing: 0px" border="3">
+		
+		<table width="60%" align="left" height="30px"style="background: linear-gradient(#AACBEE 5%, #fff 120%);
+			style="border-collapse: separate; border-spacing: 2px" border="3" >
 
 		
 			<tr>
@@ -97,7 +126,6 @@
 				<th></th>
 				<th>DATE</th>
 				<th></th>
-				<th>Total</th>
 			</tr>
 
 			<tr>
@@ -117,7 +145,7 @@
 						<c:forEach items="${userWiseList}" var="dlist">
 						<c:set var="total" value="${total+dlist.amount}" />
 						</c:forEach>
-						<td>${total}</td>
+						
 					</tr>
 				</c:forEach>
 			</tr>
@@ -130,9 +158,20 @@
 			</tr>
 			<tr>
 		</table>
+		<table align="center"  >
+
+<tr> 
+<th>TotalAmount:</th>
+</tr>
+
+<tr >
+<th>${total}</th>
+
+</tr>
+</table>
 		</div>
 		<table>
-		<a href="http://localhost:8080/roomApp/mvc/home">Back</a>
+		<a ><a href="/roomApp/mvc/home?userID=<%=name%>">Back</a></a>
 		</table>
 		
 		

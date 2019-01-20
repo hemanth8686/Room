@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>MONTHLY EXPENCES</title>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -199,14 +199,15 @@ ul, li {
 		%>
 
 
-		<table align="left" bgcolor="orange">
+	
 			<%-- <tr align="left">
 		
 				<th>YourID:<input value="<%=name%>" /></th>
 			</tr> --%>
 		</table>
-		<table align="center" width="100%" bgcolor="skyblue">
-
+	<tr style="display: none;" class="hide1"><th  colspan="11"><table width="100%" 
+style="background: linear-gradient(#AACBEE 5%, #fff 120%);border-bottom-width: 8px;border-left-width: 8px" frame="border" align="left" >
+<tr><td>&nbsp;&nbsp;&nbsp;</td>
 
 			<tr>
 				<td align="right" colspan="2">YOU ARE LOGEED IN AS: <a><%=name%></a>
@@ -232,10 +233,12 @@ ul, li {
 
 
 		</table>
-		<tr>
-				<td>Back</td>
-				<a><a href="http://localhost:8080/roomApp/mvc/home">Back</a></a>
+		<table >
+		<tr >
+				<td rowspan="9">Back</td>
+				<a ><a href="/roomApp/mvc/home?userID=<%=name%>">Back</a></a>
 			</tr>
+			</table>
 		
 	</form>
 </body>

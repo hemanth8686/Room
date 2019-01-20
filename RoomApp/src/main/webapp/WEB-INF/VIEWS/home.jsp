@@ -3,6 +3,7 @@
  <%@ page isELIgnored="false"%>
  <%@ page import = "java.io.*,java.util.*" %>
 <%@ page import = "javax.servlet.*,java.text.*" %>
+
  
 
 <html>
@@ -110,6 +111,7 @@ img {
 
 </style>
 </head>
+<title>HOME</title>
 <body>
 <%
 		Integer name = (Integer) session.getAttribute("name");
@@ -156,7 +158,9 @@ img {
 	
 			 <td>
 				<a href="/roomApp/mvc/logout">LogOut</a>
-			<td align="right"><img src="data:image/jpeg;base64,${proPic}" width="100" height="200" class="avatar"></td> 
+			<td align="right"><img src="data:image/jpeg;base64,${proPic}" width="100" height="200" class="avatar" >
+			
+			</td> 
 				<td align="right"></td>
 				</td>
 					

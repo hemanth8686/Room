@@ -72,7 +72,6 @@ public class RoomController {
 	public static Date currentDate() {
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		java.util.Date date = new java.util.Date();
-		System.out.println(dateFormat.format(date));
 		return (Date) date;
 
 	}
@@ -97,7 +96,6 @@ public class RoomController {
 			}
 
 		}
-		System.out.println(status + "hjbkkbkbh");
 		session.setAttribute("firstName", firstName);
 		java.util.Date bDate = new java.util.Date();
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
@@ -123,7 +121,6 @@ public class RoomController {
 
 		}
 
-		System.out.println(eventText);
 		if (password.equalsIgnoreCase(userPassword) && status == 1) {
 			view.setViewName("home");
 
@@ -172,9 +169,21 @@ public class RoomController {
 	}
 
 	@RequestMapping(value = "home")
-	public ModelAndView home() {
+	public ModelAndView home(@RequestParam(value="userID") int name) {
 		ModelAndView view = new ModelAndView();
+		List<RoomRegister> registerInfo = roomService.getRegisterUser(name);
+
+		for (RoomRegister roomRegister : registerInfo) {
+			byte[] proPic = roomRegister.getProfilePic();
+			if (proPic.length > 0) {
+				byte[] encoded = Base64.encodeBase64(proPic);
+				String encodedString = new String(encoded);
+				view.addObject("proPic", encodedString);
+			}
+
+		}
 		view.setViewName("home");
+		
 		return view;
 	}
 
@@ -235,7 +244,6 @@ public class RoomController {
 		this.dailyList = roomService.getExpenseList(userID, fDate, tDate);
 		for (Expenses expenses : dailyList) {
 			int amount = expenses.getAmount();
-			System.out.println(amount);
 
 		}
 		System.out.println(dailyList);
@@ -265,7 +273,6 @@ public class RoomController {
 		java.util.Date tDate = sf.parse(toDate);
 		this.userWiseList = roomService.userWise(username, userID, fDate, tDate);
 		view.addObject("userWiseList", userWiseList);
-		System.out.println(userWiseList);
 		view.setViewName("userwise");
 		return view;
 
@@ -287,7 +294,6 @@ public class RoomController {
 
 		byte[] bytes = eventImage.getBytes();
 		Path path = Paths.get(fileUpload + eventImage.getOriginalFilename());
-		System.out.println(path + "poji");
 		Files.write(path, bytes);
 
 		ModelAndView view = new ModelAndView();
@@ -311,8 +317,11 @@ public class RoomController {
 	@RequestMapping(value = "activateUser")
 	public ModelAndView activateUser(@RequestParam(value = "userID") int userID) {
 		ModelAndView view = new ModelAndView();
-		System.out.println(userID);
 		roomService.activateUser(userID);
+		List<RoomRegister> activatedList = roomService.getActivatedList();
+		List<RoomRegister> DeactivatedList = roomService.getDeActivatedList();
+		view.addObject("DeactivatedList", DeactivatedList);
+		view.addObject("activatedList", activatedList);
 		view.setViewName("userList");
 		return view;
 

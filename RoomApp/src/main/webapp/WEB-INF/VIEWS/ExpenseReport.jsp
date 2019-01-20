@@ -47,6 +47,22 @@
 		$("#todate").datepicker();
 	});
 </script>
+<script type="text/javascript">
+function validateForm() {
+	 var fdate =  $('#fromdate').val();
+	 var tdate = $('#todate').val();
+	  if (fdate == "") {
+	    alert("please select fromdate");
+	    return false;
+	  }
+	  if (tdate == "") {
+		    alert("please select todate");
+		    return false;
+		  }
+	 
+	}
+</script>
+	
 <style>
   .bordered {
     width: 900px;
@@ -57,7 +73,7 @@
   }
 </style>
 </head>
-<body style="background-color:skyblue;color:white;">
+<body style="background-color:;color:white;">
 	<form action="expensesReport" method="get">
 		<%
 			Integer name = (Integer) session.getAttribute("name");
@@ -68,7 +84,7 @@
 		%>
 
 
-		<table bgcolor="green" width="100%">
+		<table bgcolor="green" width="60%">
 		 
 			<tr align="right">
 				<td align="right" colspan="2">YOU ARE LOGEED IN AS: <a><%=name%></a>
@@ -79,7 +95,7 @@
 				<td><input type="text" name="fromDate" id="fromdate"></td>
 				<td>to:</td>
 				<td><input type="text" name="toDate" id="todate"></td>
-				<td><input type="submit" value="getReport"></td>
+				<td><input type="submit" value="getReport" onclick="return validateForm() "></td>
 			</tr>
 
 			
@@ -89,10 +105,12 @@
 			
 
 		</table>
-		<div class="bordered">
+		<!-- <div class="bordered"> -->
 	
-		<table align="center" nowrap >
-			<tr style="bgcolor:4682B4"  bordercolor="blue">
+	<table width="60%" align="left" height="30px"style="background: linear-gradient(#AACBEE 5%, #fff 120%);
+			style="border-collapse: separate; border-spacing: 2px" border="3" >
+
+			<tr >
 			<th ></th>
 				<th nowrap="nowrap">USER ID</th>
 				<th></th>
@@ -128,7 +146,7 @@
 </table>
 
 
-<table align="right" >
+<table align="center" >
 
 <tr> 
 <th>TotalAmount:</th>
@@ -145,7 +163,7 @@
 
 
 
-<a href="http://localhost:8080/roomApp/mvc/home">Back</a>
+<a href="/roomApp/mvc/home?userID=<%=name%>">Back</a>
 
 
 	</form>

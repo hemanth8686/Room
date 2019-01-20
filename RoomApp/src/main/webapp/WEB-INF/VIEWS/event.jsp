@@ -69,17 +69,18 @@ function numbersonly(evt){
 </table>
 
  <div class="imgcontainer" style="size: 20px">
-    <img src="https://renotahoenace.net/Image/news/events.png">
+    <img src="https://renotahoenace.net/Image/news/events.png" height="900px" width="2000px">
     </div>
 
 
 
 
 
-<a href="http://localhost:8080/roomApp/mvc/home">Back</a>
+<a href="/roomApp/mvc/home?userID=<%=name%>">Back</a>
 
 </tr></form:form>
 </form>
+
 
 </body>
 </html>

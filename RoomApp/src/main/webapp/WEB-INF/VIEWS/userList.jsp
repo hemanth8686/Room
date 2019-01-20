@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>USER LIST</title>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -26,10 +26,10 @@
 <title>Insert title here</title>
  <style type="text/css">
 .textBox {
-       background: white;
+       background:  linear-gradient(#AACBEE 5%, #fff 120%);
+       height:1000px
        border: 0px solid #6DA6D5;
        border-radius: 5px;
-    
        color: blue;
        outline: none;
        height: 400px;
@@ -56,7 +56,13 @@ function numbersonly(evt){
 <body>
 <form action="gotoUserList" method="get" >
 <div id="textBox" class="textBox">
-	<table align="center" frame="box" width=50%"" nowrap >
+<%
+			Integer name = (Integer) session.getAttribute("name");
+		%>
+
+	<table width="100%" 
+style="background: linear-gradient(#AACBEE 5%, #fff 120%);border-bottom-width: 8px;border-left-width: 8px" frame="border" align="left" >
+<tr><td>&nbsp;&nbsp;&nbsp;</td>
 			<tr style="bgcolor:4682B4"  bordercolor="blue">
 		<td></td>
 		
@@ -100,7 +106,9 @@ function numbersonly(evt){
 			</tr>
 </table>
 
-<table align="center" frame="box" width=50%"" nowrap >
+<table width="100%" 
+style="background: linear-gradient(#AACBEE 5%, #fff 120%);border-bottom-width: 8px;border-left-width: 8px" frame="border" align="left" >
+<tr><td>&nbsp;&nbsp;&nbsp;</td>
 			<tr style="bgcolor:4682B4"  bordercolor="blue">
 		<td></td>
 		
@@ -143,9 +151,9 @@ function numbersonly(evt){
 				</c:forEach>
 			</tr>
 </table>
-<table>
-<tr>
-<th>
+<table align="right" bgcolor="skyblue">
+<tr >
+<th colspan="8" align="right">
 <input type="text" name="userID" id="userID">
 <input type="submit" formaction="activateUser" value="activate" onclick="return validateForm()" /> 
 
@@ -156,7 +164,9 @@ function numbersonly(evt){
 
 </table>
 </div>
-
+<table>
+<a href="/roomApp/mvc/home?userID=<%=name%>">Back</a>
+</table>
 
 
 
