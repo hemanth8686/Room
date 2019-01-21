@@ -66,6 +66,7 @@ function validateForm() {
 <style>
   .bordered {
     width: 900px;
+    color:black
     height: 500px;
     padding: 20px;
     border: 5px solid black;
@@ -73,7 +74,7 @@ function validateForm() {
   }
 </style>
 </head>
-<body style="background-color:;color:white;">
+<body style="background-color:;color:black;">
 	<form action="expensesReport" method="get">
 		<%
 			Integer name = (Integer) session.getAttribute("name");
@@ -107,7 +108,8 @@ function validateForm() {
 		</table>
 		<!-- <div class="bordered"> -->
 	
-	<table width="60%" align="left" height="30px"style="background: linear-gradient(#AACBEE 5%, #fff 120%);
+		
+		<table width="60%" align="left" height="30px"style="background: linear-gradient(#AACBEE 5%, #fff 120%);
 			style="border-collapse: separate; border-spacing: 2px" border="3" >
 
 			<tr >
@@ -146,7 +148,7 @@ function validateForm() {
 </table>
 
 
-<table align="center" >
+<table align="center" style="color: blue" >
 
 <tr> 
 <th>TotalAmount:</th>
@@ -157,7 +159,6 @@ function validateForm() {
 
 </tr>
 </table>
-</div>			
 
 
 

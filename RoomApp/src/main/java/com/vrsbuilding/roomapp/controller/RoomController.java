@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.fileupload.FileUpload;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,8 @@ public class RoomController {
 	private RegisterBean roomBean;
 	@Autowired
 	private ExpensesDetails expensesDetails;
+	final static Logger logger = Logger.getLogger(RoomController.class);
+
 
 	private int age;
 	int userID, amt;
@@ -80,6 +83,7 @@ public class RoomController {
 	public ModelAndView validate(@RequestParam(value = "userName") int userName,
 			@RequestParam(value = "password") String password, javax.servlet.http.HttpSession session)
 			throws ParseException, IOException {
+		logger.debug("jiuyfgc");
 		session.setAttribute("name", userName);
 		ModelAndView view = new ModelAndView();
 		String userPassword = roomService.getPassword(userName);

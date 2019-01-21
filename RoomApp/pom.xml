@@ -102,6 +102,11 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.3.1</version>
 		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
 
 		<!-- Apache Commons IO -->
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
