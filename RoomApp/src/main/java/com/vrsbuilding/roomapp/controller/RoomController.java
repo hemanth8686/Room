@@ -51,7 +51,7 @@ public class RoomController {
 	private RegisterBean roomBean;
 	@Autowired
 	private ExpensesDetails expensesDetails;
-	final static Logger logger = Logger.getLogger(RoomController.class);
+//	final static Logger logger = Logger.getLogger(RoomController.class);
 
 
 	private int age;
@@ -83,7 +83,7 @@ public class RoomController {
 	public ModelAndView validate(@RequestParam(value = "userName") int userName,
 			@RequestParam(value = "password") String password, javax.servlet.http.HttpSession session)
 			throws ParseException, IOException {
-		logger.debug("jiuyfgc");
+	//	logger.debug("hiii team");
 		session.setAttribute("name", userName);
 		ModelAndView view = new ModelAndView();
 		String userPassword = roomService.getPassword(userName);
@@ -96,6 +96,7 @@ public class RoomController {
 			if (proPic.length > 0) {
 				byte[] encoded = Base64.encodeBase64(proPic);
 				String encodedString = new String(encoded);
+				System.out.println(encodedString+".........this is imsage...");
 				view.addObject("proPic", encodedString);
 			}
 

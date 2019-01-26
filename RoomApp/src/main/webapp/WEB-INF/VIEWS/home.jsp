@@ -106,9 +106,6 @@ img {
   -ms-transform: translate(-50%, -50%)
 }
 
-
-
-
 </style>
 </head>
 <title>HOME</title>
