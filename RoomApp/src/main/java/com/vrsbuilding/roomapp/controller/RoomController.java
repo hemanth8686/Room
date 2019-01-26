@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mchange.net.MailSender;
 import com.vrsbuilding.roomapp.bean.RegisterBean;
 import com.vrsbuilding.roomapp.info.ExpensesDetails;
 import com.vrsbuilding.roomapp.model.Event;
@@ -51,8 +53,9 @@ public class RoomController {
 	private RegisterBean roomBean;
 	@Autowired
 	private ExpensesDetails expensesDetails;
+	@Autowired
+	JavaMailSender mailSender;
 	final static Logger logger = Logger.getLogger(RoomController.class);
-
 
 	private int age;
 	int userID, amt;
@@ -172,7 +175,7 @@ public class RoomController {
 	}
 
 	@RequestMapping(value = "home")
-	public ModelAndView home(@RequestParam(value="userID") int name) {
+	public ModelAndView home(@RequestParam(value = "userID") int name) {
 		ModelAndView view = new ModelAndView();
 		List<RoomRegister> registerInfo = roomService.getRegisterUser(name);
 
@@ -186,7 +189,7 @@ public class RoomController {
 
 		}
 		view.setViewName("home");
-		
+
 		return view;
 	}
 
@@ -287,6 +290,7 @@ public class RoomController {
 		return view;
 	}
 
+	// to set a event
 	@RequestMapping(value = "setEvent")
 	public ModelAndView setEvent(@RequestParam(value = "event", required = false) String event,
 			@RequestParam(value = "eventDate") String eventDate, HttpSession session,
@@ -304,6 +308,7 @@ public class RoomController {
 		view.setViewName("event");
 		return view;
 	}
+	// to display userlist
 
 	@RequestMapping(value = "gotoUserList")
 	public ModelAndView gotoUserList() {
@@ -316,6 +321,7 @@ public class RoomController {
 		return view;
 	}
 
+	// to get current active users
 	@RequestMapping(value = "activateUser")
 	public ModelAndView activateUser(@RequestParam(value = "userID") int userID) {
 		ModelAndView view = new ModelAndView();
@@ -329,6 +335,7 @@ public class RoomController {
 
 	}
 
+	// log-out method
 	@RequestMapping(value = "logout")
 	public ModelAndView logOut(HttpSession session) {
 		ModelAndView view = new ModelAndView();
@@ -336,6 +343,13 @@ public class RoomController {
 		session.invalidate();
 		return view;
 
+	}
+
+	@RequestMapping(value = "gotoMail")
+	public ModelAndView gotoMail() {
+		ModelAndView view = new ModelAndView();
+		view.setViewName("mail");
+		return view;
 	}
 
 }

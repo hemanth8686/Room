@@ -82,7 +82,7 @@ img {
 
 #contact {
     top: 200px;
-    background-color: #555
+    background-color: #555;
 }
  #event {
     top: 260px;
@@ -95,6 +95,10 @@ img {
 #list {
     top:330px;
     background-color: orange;
+}
+#mail {
+    top:390px;
+    background-color: #555;
 }
 .middle {
   transition: .5s ease;
@@ -186,6 +190,7 @@ img {
   <a href="gotoUserWise" id="contact">UserWiseReport</a>
   <a href="gotoEvent" id="event">Event</a>
    <a href="gotoUserList" id="list">UserList</a>
+  <a href="gotoMail" id="mail">Mail</a>
 
 </div>
 
