@@ -4,34 +4,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Mail</title>
 </head>
 <body>
-<form action="sendMail" method="post">
-<table>
-<tr>
-<td>
-<tr>
-				<td>Recept mail:</td>
-				<th><input type="text" name="recepitId" ></th>
-				<td>Recept mail:</td>
-				<th><textarea name="recepitId" ></textarea>
-				
-				<td>Recept mail:</td>
-				<th><input type="text" name="recepitId" ></th>
-				
-				<td>Recept mail:</td>
-				<th><input type="text" name="recepitId" ></th>
-				
-
-
-</tr>
-
-
-</table>
-
-
-</form>
-
+    <center>
+        <h1>Send e-mail </h1>
+        <form method="post" action="sendMail">
+            <table border="0" width="80%">
+                <tr>
+                    <td>To:</td>
+                    <td><input type="text" name="recipientMail" size="65" /></td>
+                </tr>
+                <tr>
+                    <td>Subject:</td>
+                    <td><input type="text" name="subject" size="65" /></td>
+                </tr>
+                <tr>
+                    <td>Message:</td>
+                    <td><textarea cols="50" rows="10" name="message"></textarea></td>
+                </tr> 
+                 <tr>
+                    <td>Message:</td>
+                    <td><input type="file" name="attachment" /></td>
+                </tr>                 
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Send E-mail" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </center>
 </body>
 </html>

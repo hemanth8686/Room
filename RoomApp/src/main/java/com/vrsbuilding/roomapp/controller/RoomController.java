@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -54,7 +55,7 @@ public class RoomController {
 	@Autowired
 	private ExpensesDetails expensesDetails;
 	@Autowired
-	JavaMailSender mailSender;
+	private JavaMailSender mailSender;
 	final static Logger logger = Logger.getLogger(RoomController.class);
 
 	private int age;
@@ -349,6 +350,20 @@ public class RoomController {
 	public ModelAndView gotoMail() {
 		ModelAndView view = new ModelAndView();
 		view.setViewName("mail");
+		return view;
+	}
+	@RequestMapping(value="sendMail")
+	public ModelAndView sendMail(@RequestParam(value="recipientMail")String RecepitMail,@RequestParam(value="subject") String subject,@RequestParam(value="message")String message) {
+		
+		ModelAndView view=new ModelAndView();
+		   SimpleMailMessage email = new SimpleMailMessage();
+		  email.setTo(RecepitMail);
+		  email.setSubject(subject);
+		  email.setText(message);
+		  mailSender.send(email);
+		  view.setViewName("mail");
+		
+		
 		return view;
 	}
 
