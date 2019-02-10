@@ -16,6 +16,8 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
@@ -24,8 +26,10 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -56,7 +60,7 @@ public class RoomController {
 	private ExpensesDetails expensesDetails;
 	@Autowired
 	private JavaMailSender mailSender;
-	final static Logger logger = Logger.getLogger(RoomController.class);
+	// final static Logger logger = Logger.getLogger(RoomController.class);
 
 	private int age;
 	int userID, amt;
@@ -352,19 +356,98 @@ public class RoomController {
 		view.setViewName("mail");
 		return view;
 	}
-	@RequestMapping(value="sendMail")
-	public ModelAndView sendMail(@RequestParam(value="recipientMail")String RecepitMail,@RequestParam(value="subject") String subject,@RequestParam(value="message")String message) {
-		
-		ModelAndView view=new ModelAndView();
-		   SimpleMailMessage email = new SimpleMailMessage();
-		  email.setTo(RecepitMail);
-		  email.setSubject(subject);
-		  email.setText(message);
-		  mailSender.send(email);
-		  view.setViewName("mail");
-		
-		
+
+	@RequestMapping(value = "sendMail")
+	public ModelAndView sendMail(@RequestParam(value = "recipientMail") String RecepitMail,
+			@RequestParam(value = "subject") String subject, @RequestParam(value = "message") String emailMessage)
+			throws MessagingException {
+
+		ModelAndView view = new ModelAndView();
+		SimpleMailMessage email = new SimpleMailMessage();
+		MimeMessage message = mailSender.createMimeMessage();
+		try {
+
+			email.setTo(RecepitMail);
+			email.setSubject(subject);
+			email.setText(emailMessage);
+			mailSender.send(email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		view.setViewName("mail");
+
 		return view;
+	}
+
+	@RequestMapping(value = "update")
+	public ModelAndView updatePic(HttpSession session) {
+		userID = (Integer) session.getAttribute("name");
+		ModelAndView view = new ModelAndView();
+		List<RoomRegister> registerInfo = roomService.getRegisterUser(userID);
+
+		for (RoomRegister roomRegister : registerInfo) {
+			byte[] proPic = roomRegister.getProfilePic();
+			if (proPic.length > 0) {
+				byte[] encoded = Base64.encodeBase64(proPic);
+				String encodedString = new String(encoded);
+				view.addObject("proPic", encodedString);
+				System.out.println(encodedString);
+			}
+
+		}
+		view.setViewName("profileUpdate");
+
+		return view;
+	}
+
+	@RequestMapping(value = "gotoCalculate")
+	public ModelAndView gotoCalculate() {
+		ModelAndView view = new ModelAndView();
+		view.setViewName("Calculate");
+		return view;
+
+	}
+
+	@RequestMapping(value = "calculationReport")
+	public ModelAndView calculationReport(@RequestParam(value = "fromDate", required = false) String fromDate,
+			@RequestParam(value = "toDate", required = false) String toDate,
+			@RequestParam(value = "userName", required = false) Integer userName, HttpSession session)
+			throws ParseException {
+		ModelAndView view = new ModelAndView();
+		try {
+		SimpleDateFormat sf = new SimpleDateFormat("MM/dd/yyyy");
+		java.util.Date fDate = sf.parse(fromDate);
+		java.util.Date tDate = sf.parse(toDate);
+		Long sumPerHead = roomService.calculationList(fDate, tDate);
+		System.out.println(sumPerHead+"per head");
+		session.setAttribute("tDate", tDate);
+		session.setAttribute("fDate", fDate);
+		session.setAttribute("sumPerHead", sumPerHead);
+		
+		view.setViewName("Calculate");
+	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return view;
+		
+
+	}
+
+	@RequestMapping(value = "calculate")
+	public ModelAndView calculate(@RequestParam(value = "userName",required=false) int userName, HttpSession session) {
+		ModelAndView view = new ModelAndView();
+		java.util.Date fDate = (java.util.Date) session.getAttribute("fDate");
+		java.util.Date tDate = (java.util.Date) session.getAttribute("tDate");
+		Long sumPerHead = (Long) session.getAttribute("sumPerHead");
+		Long userAmount = roomService.calculateAmount(fDate, tDate, userName);
+		Long userAmountMonth = userAmount - sumPerHead;
+		session.setAttribute("userAmountMonth", userAmountMonth);
+		view.setViewName("Calculate");
+
+		return view;
+
 	}
 
 }

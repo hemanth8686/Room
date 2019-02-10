@@ -4,10 +4,12 @@
  <%@ page import = "java.io.*,java.util.*" %>
 <%@ page import = "javax.servlet.*,java.text.*" %>
 
+
  
 
 <html>
 <head>
+
 <style>
 <style>
 .container {
@@ -98,7 +100,15 @@ img {
 }
 #mail {
     top:390px;
-    background-color: #555;
+    background-color: #FA8072;
+}
+#profile {
+    top:390px;
+    background-color: #008080;
+}
+#calculate{
+    top:450px;
+    background-color: #f44336;
 }
 .middle {
   transition: .5s ease;
@@ -109,7 +119,24 @@ img {
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%)
 }
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="css/jquery-ui-1.10.0.custom.min.css"
+	type="text/css" />
+<link type="text/css" rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/styles.css" />
+<script type="text/javascript" src="Javascripts/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="Javascripts/jquery.ui.core.min.js"></script>
+<link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script type="text/javascript" src="Javascripts/myAuto.js"></script>
+<script type="text/javascript" src="Javascripts/myAuto2.js"></script>
+<script>
+	function image(img) {
+    var src = img.src;
+    window.open(src);
+}
+</script>
 </style>
 </head>
 <title>HOME</title>
@@ -159,7 +186,7 @@ img {
 	
 			 <td>
 				<a href="/roomApp/mvc/logout">LogOut</a>
-			<td align="right"><img src="data:image/jpeg;base64,${proPic}" width="100" height="200" class="avatar" >
+			<td align="right"><img src="data:image/jpeg;base64,${proPic}" width="100" height="200" class="avatar" onclick="image(this)" >
 			
 			</td> 
 				<td align="right"></td>
@@ -191,6 +218,8 @@ img {
   <a href="gotoEvent" id="event">Event</a>
    <a href="gotoUserList" id="list">UserList</a>
   <a href="gotoMail" id="mail">Mail</a>
+   <a href="gotoCalculate" id="calculate">Amount calculator</a>
+   
 
 </div>
 

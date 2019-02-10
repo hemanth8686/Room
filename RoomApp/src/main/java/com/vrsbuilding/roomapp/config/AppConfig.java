@@ -80,8 +80,9 @@ public class AppConfig {
 	}
 	 @Bean
 	    public JavaMailSender getMailSender(){
-	        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-	         
+		   JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		 try {
+			
 	        //Using gmail
 	        mailSender.setHost("smtp.gmail.com");
 	        mailSender.setPort(587);
@@ -95,6 +96,12 @@ public class AppConfig {
 	        javaMailProperties.put("mail.debug", "true");//Prints out everything on screen
 	         
 	        mailSender.setJavaMailProperties(javaMailProperties);
-	        return mailSender;
+	       
+		 } catch (Exception e) {
+				// TODO: handle exception
+			}
+		return mailSender;
+		
 	    }
+	
 }

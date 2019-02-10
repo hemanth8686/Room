@@ -9,7 +9,7 @@
 <body>
     <center>
         <h1>Send e-mail </h1>
-        <form method="post" action="sendMail">
+        <form method="post" action="sendMail"  enctype="multipart/form-data" >
             <table border="0" width="80%">
                 <tr>
                     <td>To:</td>

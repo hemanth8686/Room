@@ -84,6 +84,13 @@ public class RoomService {
 		return roomDao.getRegisterUser( userName);
 	}
 	
+	public Long calculationList( java.util.Date fDate, java.util.Date tDate) throws ParseException{
+		return roomDao.calculationList(fDate,tDate);
+	}
+	public Long calculateAmount( java.util.Date fDate, java.util.Date tDate,int userName) {
+		return roomDao.calculateAmount(fDate,tDate,userName);
+	}
+	
 	
 
 	

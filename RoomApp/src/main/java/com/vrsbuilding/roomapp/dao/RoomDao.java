@@ -217,7 +217,6 @@ public class RoomDao {
 				if(it.hasNext()) {
 				Expenses Obj = (Expenses) it.next();
 				Obj.getAmount();
-				System.out.println(Obj.getAmount()+"dao");
 				dailyList.add(Obj);
 				
 				}
@@ -244,7 +243,6 @@ public class RoomDao {
 				if(it.hasNext()) {
 				Expenses Obj = (Expenses) it.next();
 				Obj.getAmount();
-				System.out.println(Obj.getAmount()+"dao");
 				userWiseList.add(Obj);
 				
 				}
@@ -265,7 +263,6 @@ public class RoomDao {
 		java.util.Date exDate = sf.parse(eventDate);
 		Transaction transaction=session.beginTransaction();
 		try {
-			System.out.println(event);
 			Event event1=new Event();
 			event1.setEvent(event);
 			event1.setEventDate(eventDate);
@@ -401,7 +398,10 @@ public class RoomDao {
 			for (Iterator<?> it = ((org.hibernate.Query<?>) query).iterate(); it.hasNext();) {
 				if (it.hasNext()) {
 					RoomRegister Obj = (RoomRegister) it.next();
-					System.out.println(Obj.getAge());
+					Obj.getAge();
+					byte[] image=Obj.getProfilePic();
+					
+					
 					
 					registerInfo.add(Obj);
 				}
@@ -417,8 +417,67 @@ public class RoomDao {
 
 	}
 
+	public Long calculationList(Date fDate, Date tDate) {
+		
+		int count=0;
+		Session session = sessionFactory.openSession();
+		SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd");
+		String SQL_QUERY="";
+	
+		Long sum = null;
+		Long perHead=null;
+		try {
+				Query query = session.createQuery("select sum(amount)  from Expenses where ExpenseDate>='"+sf.format(fDate)+"' and ExpenseDate <= '"+sf.format(tDate)+"'");
+			 sum = (Long) ((org.hibernate.query.Query) query).uniqueResult();
+			 System.out.println(sum+"this is sum");
+			
+		
+		 Query query1 = session.createQuery("select sum(Status)  from RoomRegister where Status=1 ");
+			Long sum2 = (Long) ((org.hibernate.query.Query)  query1).uniqueResult();
+			 System.out.println(sum2+"this is sum"+query1);
+			 
+			perHead=sum/sum2;
+			 System.out.println(perHead+"pe");
+				
+				
+			     
+		
+		}
+				
+			
+		
+
+		catch (HibernateException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return perHead;
+	}
+
+	public Long calculateAmount(Date fDate, Date tDate, int userName) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd");
+		String SQL_QUERY="";
+		Long sum=null;
+		try {
+			Query query = session.createQuery("select sum(amount)  from Expenses where ExpenseDate>='"+sf.format(fDate)+"' and ExpenseDate <= '"+sf.format(tDate)+"' and userID= '"+userName+"' ");
+			 sum = (Long) ((org.hibernate.query.Query) query).uniqueResult();
+			 System.out.println(sum+"this is sum");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		return sum;
+	}
+}
+
 	
 
 
 
-}
+

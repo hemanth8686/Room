@@ -114,7 +114,7 @@ function numbersonly(evt){
 
 
 			<tr>
-				<td align="right" colspan="2">YOU ARE LOGEED IN AS: <a><%=name%></a>
+				<td align="right" colspan="2">YOU ARE LOGGED IN AS: <a><%=name%></a>
 				</td>
 			</tr>
 			
