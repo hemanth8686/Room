@@ -58,6 +58,19 @@ function validateForm() {
 	 
 	}
 </script>
+<script type="text/javascript">
+var tableToExcel = (function() {
+  var uri = 'data:application/vnd.ms-excel;base64,'
+    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+    , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+    , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+  return function(table, name) {
+    if (!table.nodeType) table = document.getElementById(table)
+    var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+    window.location.href = uri + base64(format(template, ctx))
+  }
+})()
+</script>
 <style>
   .bordered {
     width: 900px;
@@ -84,6 +97,7 @@ function validateForm() {
 			Integer name = (Integer) session.getAttribute("name");
 		
 		%>
+			<input type="button" onclick="tableToExcel('testTable', 'REPORT')" value="Export to Excel">
 		 
 			<tr align="right" >
 				<td align="right" colspan="9">YOU ARE LOGEED IN AS: <a><%=name%></a>
@@ -108,11 +122,12 @@ function validateForm() {
 			
 
 		</table>
+	
 		
 		
 			
 		
-		<table width="60%" align="left" height="30px"style="background: linear-gradient(#AACBEE 5%, #fff 120%);
+		<table id="testTable" width="60%" align="left" height="30px"style="background: linear-gradient(#AACBEE 5%, #fff 120%);
 			style="border-collapse: separate; border-spacing: 2px" border="3" >
 
 		
@@ -149,11 +164,14 @@ function validateForm() {
 					</tr>
 				</c:forEach>
 			</tr>
+			<th align="right" colspan="4">Total Amount:${total}</th>
+			
 
 
 
 
 			<tr>
+			<td rowspan="10">	<a ><a href="/roomApp/mvc/home?userID=<%=name%>">Back</a></a></td>
 
 			</tr>
 			<tr>
@@ -169,10 +187,11 @@ function validateForm() {
 
 </tr>
 </table>
-		</div>
-		<table>
-		<a ><a href="/roomApp/mvc/home?userID=<%=name%>">Back</a></a>
+<table>
+	
 		</table>
+		</div>
+		
 		
 		
 		

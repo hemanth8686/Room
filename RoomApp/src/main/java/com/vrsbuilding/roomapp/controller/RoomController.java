@@ -408,7 +408,7 @@ public class RoomController {
 		return view;
 
 	}
-
+	
 	@RequestMapping(value = "calculationReport")
 	public ModelAndView calculationReport(@RequestParam(value = "fromDate", required = false) String fromDate,
 			@RequestParam(value = "toDate", required = false) String toDate,
@@ -445,7 +445,6 @@ public class RoomController {
 		Long userAmountMonth = userAmount - sumPerHead;
 		session.setAttribute("userAmountMonth", userAmountMonth);
 		view.setViewName("Calculate");
-
 		return view;
 
 	}

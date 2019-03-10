@@ -71,7 +71,7 @@ function validateForm() {
 
 
 
-<table bgcolor="blue" width="60%">
+<table bgcolor="green" width="60%">
 <%
 			Integer name = (Integer) session.getAttribute("name");
 Long sumPerHead = (Long) session.getAttribute("sumPerHead");
@@ -88,9 +88,9 @@ Long userAmountMonth = (Long) session.getAttribute("userAmountMonth");
 				<td><input type="text" name="fromDate" id="fromdate"></td>
 				<td>Month End:</td>
 				<td><input type="text" name="toDate" id="todate"></td>
-				<td><input type="submit" value="getReport" onclick="return validateForm() "></td>
+				<td><input type="submit" value="setmonth" onclick="return validateForm() "></td>
 			</tr>
-			<table>
+			<table bgcolor="green" width="60%">
 			<tr><td>userId:</td>
 				<th><input type="text" name="userName" id="userName">
 				<input type="submit" formaction="calculate" value="calculate"/></th>
@@ -100,7 +100,7 @@ Long userAmountMonth = (Long) session.getAttribute("userAmountMonth");
 			
 			<tr>
 			
-			<td align="right" colspan="2">Per Head Amount is: <a><%=sumPerHead%></a>
+			<td align="right" colspan="2">Per Head Amount is: <a><%=sumPerHead%></br></a>
 				<td align="right" colspan="2">User Amount is: <a><%=userAmountMonth%></a>
 				
 			</tr>
@@ -108,6 +108,7 @@ Long userAmountMonth = (Long) session.getAttribute("userAmountMonth");
 			
 
 		</table>
+		<a href="/roomApp/mvc/home?userID=<%=name%>">Back</a>
 		</form>
 
 </body>

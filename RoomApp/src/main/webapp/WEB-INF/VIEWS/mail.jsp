@@ -7,6 +7,9 @@
 <title>Mail</title>
 </head>
 <body>
+<%
+			Integer name = (Integer) session.getAttribute("name");
+		%>
     <center>
         <h1>Send e-mail </h1>
         <form method="post" action="sendMail"  enctype="multipart/form-data" >
@@ -33,6 +36,7 @@
                     </td>
                 </tr>
             </table>
+         <a  href="/roomApp/mvc/home?userID=<%=name%>">Back</a>
         </form>
     </center>
 </body>

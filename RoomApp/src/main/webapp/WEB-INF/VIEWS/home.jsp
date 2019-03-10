@@ -131,11 +131,21 @@ img {
 <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <script type="text/javascript" src="Javascripts/myAuto.js"></script>
 <script type="text/javascript" src="Javascripts/myAuto2.js"></script>
-<script>
+<script type="text/javascript">
 	function image(img) {
     var src = img.src;
     window.open(src);
 }
+</script>
+<script type="text/javascript">
+function image(img) {
+    var src = img.src;
+    window.open(src);
+}
+</script>
+<script type="text/javascript">
+ function imgWindow() {
+  window.open("image") }
 </script>
 </style>
 </head>
