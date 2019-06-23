@@ -88,14 +88,17 @@ public class AppConfig {
 	        mailSender.setPort(587);
 	        mailSender.setUsername("vrsroom@gmail.com");
 	        mailSender.setPassword("hemanth@09");
+	        
 	         
-	        Properties javaMailProperties = new Properties();
-	        javaMailProperties.put("mail.smtp.starttls.enable", "true");
-	        javaMailProperties.put("mail.smtp.auth", "true");
-	        javaMailProperties.put("mail.transport.protocol", "smtp");
-	        javaMailProperties.put("mail.debug", "true");//Prints out everything on screen
+	        Properties props = new Properties();
+	        props.put("mail.smtp.auth", "true");
+	        props.put("mail.smtp.starttls.enable", "true");
+	        props.put("mail.smtp.host", "smtp.gmail.com");
+	        props.put("mail.smtp.port", "587");
+	        props.put("mail.smtp.ssl.trust", "smtpserver");
+	        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 	         
-	        mailSender.setJavaMailProperties(javaMailProperties);
+	        mailSender.setJavaMailProperties(props);
 	       
 		 } catch (Exception e) {
 				// TODO: handle exception

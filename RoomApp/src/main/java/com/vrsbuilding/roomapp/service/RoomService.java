@@ -91,6 +91,10 @@ public class RoomService {
 		return roomDao.calculateAmount(fDate,tDate,userName);
 	}
 	
+	public String getMaailId(String Id) {
+		return roomDao.getMailId(Id);
+	}
+	
 	
 
 	

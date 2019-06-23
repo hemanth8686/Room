@@ -474,6 +474,32 @@ public class RoomDao {
 		
 		return sum;
 	}
+	
+	
+	public String getMailId(String Id) {
+		Session session = sessionFactory.openSession();
+		String email = "";
+		try {
+			String SQL_QUERY = "from RoomRegister where email LIKE '%"+Id+"%' ";
+
+			Query query = session.createQuery(SQL_QUERY);
+
+			for (Iterator<?> it = ((org.hibernate.Query<?>) query).iterate(); it.hasNext();) {
+				RoomRegister Obj = (RoomRegister) it.next();
+				email = Obj.getEmail();
+			}
+
+		} catch (HibernateException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return email;
+
+	}
+	
+	
 }
 
 	

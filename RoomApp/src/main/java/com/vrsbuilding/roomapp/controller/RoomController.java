@@ -12,12 +12,14 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
@@ -27,17 +29,24 @@ import org.hibernate.Session;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.MediaType;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.mchange.net.MailSender;
 import com.vrsbuilding.roomapp.bean.RegisterBean;
 import com.vrsbuilding.roomapp.info.ExpensesDetails;
@@ -359,18 +368,31 @@ public class RoomController {
 
 	@RequestMapping(value = "sendMail")
 	public ModelAndView sendMail(@RequestParam(value = "recipientMail") String RecepitMail,
-			@RequestParam(value = "subject") String subject, @RequestParam(value = "message") String emailMessage)
+			@RequestParam(value = "subject") String subject, @RequestParam(value = "message") String emailMessage,@RequestParam(value = "attachment") MultipartFile profilePic)
 			throws MessagingException {
 
 		ModelAndView view = new ModelAndView();
 		SimpleMailMessage email = new SimpleMailMessage();
 		MimeMessage message = mailSender.createMimeMessage();
-		try {
 
-			email.setTo(RecepitMail);
+			/*email.setTo(RecepitMail);
 			email.setSubject(subject);
-			email.setText(emailMessage);
-			mailSender.send(email);
+			email.setText(emailMessage);*/
+			
+		//	MimeMessage message = mailSender.createMimeMessage();
+	        try {
+	            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+	           
+	            helper.setTo(RecepitMail);
+	            helper.setSubject(subject);
+	            helper.setText(emailMessage);
+	        	byte[] bs = profilePic.getBytes();
+	        	String contentType = profilePic.getContentType();
+	        	String originalFilename = profilePic.getOriginalFilename();
+	        	System.out.println(bs+"...."+originalFilename+";;;;;"+contentType);
+	            helper.addAttachment(originalFilename, new ByteArrayResource(bs,originalFilename));
+	            mailSender.send(message);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -448,5 +470,16 @@ public class RoomController {
 		return view;
 
 	}
-
+	
+	@ResponseBody
+	@GetMapping(value="getMailforAjax")
+	public String getMailforAjax(@RequestParam(value="Id")String Id ) {
+	     
+		String maailId = roomService.getMaailId(Id);
+		return maailId;
+		
+	}
+	
+	
+	
 }
